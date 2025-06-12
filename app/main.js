@@ -1,3 +1,4 @@
+
 const  cols = document.querySelectorAll('.col')
 
 function generateRandomColor () {
@@ -10,12 +11,20 @@ function generateRandomColor () {
     return '#' + color
 }
 
-console.log(generateRandomColor ());
+function setRandomColors () {
+cols.forEach((col) => {
+    const text = col.querySelector('h2');
+    const button = col.querySelector('button');
+    const color = generateRandomColor ();
+    text.textContent = color;
+    col.style.background= color;
+    setShadesColor(text, color);
+    setShadesColor(button, color)
+})
+}
 
-
-// function setRandomColors () {
-// cols.forEach((col) => {
-//     console.log(col);
-// })
-// }
-// setRandomColors()
+function setShadesColor (text, color) {
+    const luminance = chroma(color).luminance()
+    text.style.color = luminance > 0.5 ? 'black' : 'white' 
+}
+setRandomColors()
